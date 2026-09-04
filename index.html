@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teacher's Day - BCA Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- html2canvas Library for downloading card as Image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* CSS Reset & Dark Tech Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --accent-color: #00ff88;
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-color: #f3f4f6;
+            --text-light: #9ca3af;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Header */
+        header {
+            background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px solid var(--primary-color);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-light);
+        }
+
+        /* Music Controls Button */
+        .music-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .music-btn:hover {
+            background: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        /* Card Generator Container */
+        .generator-box {
+            background: var(--card-bg);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+        }
+
+        .form-group input[type="file"] {
+            background: #111827;
+            cursor: pointer;
+        }
+
+        .btn-main {
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
+        }
+
+        .btn-download {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.7);
+        }
+
+        /* Generated Wish Card Output */
+        .card-wrapper {
+            margin-top: 35px;
+        }
+
+        .output-card {
+            padding: 35px 25px;
+            background: #0d1117;
+            border: 2px solid var(--primary-color);
+            border-radius: 16px;
+            display: none;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.2);
+            position: relative;
+        }
+
+        /* Tech Code Badge Styling */
+        .code-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            background: #161b22;
+            padding: 4px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid #30363d;
+        }
+
+        /* Teacher Photo Styling */
+        .photo-preview {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 20px auto;
+            display: none;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .output-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .output-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            white-space: pre-line;
+            line-height: 1.7;
+        }
+
+        .output-card .signature {
+            margin-top: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-family: 'Fira Code', monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #0d1117;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid #21262d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f1c713.mp3?filename=inspiring-emotional-piano-124707.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <button class="music-btn" onclick="toggleMusic()" id="musicToggle">🎵 Play Song</button>
+        <div class="container">
+            <h1>Happy Teacher's Day! 🎓✨</h1>
+            <p>&lt;BCA Student | Respect & Appreciation/&gt;</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2 class="section-title">Personalized Card Generator 💻</h2>
+            <div class="generator-box">
+                <div class="form-group">
+                    <label for="teacherName">Teacher's Name:</label>
+                    <input type="text" id="teacherName" placeholder="e.g., Professor Sharma or Dr. Verma">
+                </div>
+
+                <div class="form-group">
+                    <label for="studentName">Your Name:</label>
+                    <input type="text" id="studentName" placeholder="e.g., Rahul">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherPhoto">Upload Teacher's Photo:</label>
+                    <input type="file" id="teacherPhoto" accept="image/*">
+                </div>
+
+                <button class="btn-main" onclick="generateWishCard()">Generate Wish Card 🚀</button>
+
+                <!-- Generated Output -->
+                <div class="card-wrapper">
+                    <div class="output-card" id="outputCard">
+                        <div class="code-tag">while(learning == true) { respect(teacher); }</div>
+                        <img id="photoDisplay" class="photo-preview" src="" alt="Teacher Photo">
+                        <h3 id="cardHeader"></h3>
+                        <p id="cardBody"></p>
+                        <p id="cardFooter" class="signature"></p>
+                    </div>
+
+                    <!-- Download Button -->
+                    <button id="downloadBtn" class="btn-download" onclick="downloadCard()">📥 Download Card (Image)</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built with ❤️ | Dedicated to My Respected Teacher 💡💻</p>
+    </footer>
+
+    <script>
+        // Music Control Functionality
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggle');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = "🎵 Play Song";
+            } else {
+                music.play();
+                musicBtn.innerHTML = "⏸️ Pause Song";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function generateWishCard() {
+            const teacher = document.getElementById('teacherName').value.trim();
+            const student = document.getElementById('studentName').value.trim();
+            const photoInput = document.getElementById('teacherPhoto');
+            
+            const outputCard = document.getElementById('outputCard');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const photoDisplay = document.getElementById('photoDisplay');
+            const cardHeader = document.getElementById('cardHeader');
+            const cardBody = document.getElementById('cardBody');
+            const cardFooter = document.getElementById('cardFooter');
+
+            if (teacher === "") {
+                alert("Please enter your teacher's name.");
+                return;
+            }
+
+            // Handle Image Preview
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    photoDisplay.src = e.target.result;
+                    photoDisplay.style.display = "block";
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                photoDisplay.style.display = "none";
+            }
+
+            // Single Student Personal Wish Description
+            cardHeader.innerText = `Respected ${teacher}, 💐✨`;
+            cardBody.innerText = `Aapko Meri Taraf Se Happy Teacher's Day! 🎉\n\nProgramming ka logic samjhna ho, Databases structure karna ho, Web Dev sikhna ho, ya life me Sahi direction chunna ho—aapne hamesha mujhe guide aur motivate kiya hai. 💡💻\n\nAapki mehnat, patience aur guidance ke liye main dil se aabhar vyakt karta hoon. Thank you for shaping my future! 🚀🧠`;
+            
+            if (student !== "") {
+                cardFooter.innerText = `— Respectfully, ${student} (BCA Student) 👨‍💻✨`;
+            } else {
+                cardFooter.innerText = "— With Regards, BCA Student 🌟🎓";
+            }
+
+            // Display Card
+            outputCard.style.display = "block";
+            downloadBtn.style.display = "block";
+
+            // Automatically Play Background Music on Card Generation
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }
+
+        function downloadCard() {
+            const card = document.getElementById('outputCard');
+            
+            html2canvas(card, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#0d1117"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Teachers_Day_Card_BCA.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
